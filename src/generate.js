@@ -1,25 +1,13 @@
-import './style.css';
-import Heart from '../icons/heart.svg';
-import {
-	flagsData,
-	score,
-	lives,
-	playGame,
-	generateGameGrid,
-} from './generate';
+import { flagsData, score, lives, playGame } from './gameLogic';
 
-const content = document.getElementById('content');
-const flagContainer = document.getElementById('flag-container');
-const livesWrapper = document.getElementById('lives-wrapper');
 const yourScore = document.getElementById('your-score');
+const livesWrapper = document.getElementById('lives-wrapper');
 
-(function () {
-	for (let i = 0; i < 3; i++) {
-		const heartIcon = new Image();
-		heartIcon.src = Heart;
-		livesWrapper.appendChild(heartIcon);
-	}
-
+const generateGameGrid = () => {
+	if (content.innerHTML === `<h1>Game Over</h1>`) return;
+	content.innerHTML = '';
+	const flagContainer = document.createElement('div');
+	flagContainer.setAttribute('id', 'flag-container');
 	let countryNames = [];
 
 	while (countryNames.length < 4) {
@@ -44,7 +32,7 @@ const yourScore = document.getElementById('your-score');
 
 	const guessCountry = document.createElement('h2');
 	guessCountry.textContent = countryNames[guessIdx];
-	let guess = guessCountry.textContent;
+	let fGuess = guessCountry.textContent;
 	content.append(flagContainer, guessCountry);
 
 	const flagWrappers = document.querySelectorAll('.flag-wrapper');
@@ -55,9 +43,13 @@ const yourScore = document.getElementById('your-score');
 				el.classList.remove('flag-light');
 				el.classList.add('disable-div');
 			});
+
 			const countryName = el.getAttribute('name');
-			playGame(el, countryName, guess, yourScore, livesWrapper);
+
+			playGame(el, countryName, fGuess, yourScore, livesWrapper);
 			setTimeout(generateGameGrid, 1000);
 		});
 	});
-})();
+};
+
+export { flagsData, score, lives, playGame, generateGameGrid };
