@@ -1,6 +1,6 @@
 import { flagsData, score, lives, playGame } from './gameLogic';
 
-const yourScore = document.getElementById('your-score');
+const yScore = document.getElementById('your-score');
 const livesWrapper = document.getElementById('lives-wrapper');
 
 const generateGameGrid = () => {
@@ -8,12 +8,14 @@ const generateGameGrid = () => {
 	content.innerHTML = '';
 	const flagContainer = document.createElement('div');
 	flagContainer.setAttribute('id', 'flag-container');
-	let countryNames = [];
+	let cNames = [];
+	let cIndexes = [];
 
-	while (countryNames.length < 4) {
+	while (cNames.length < 4) {
 		let idx = Math.floor(Math.random() * flagsData.length);
-		if (!countryNames.includes(flagsData[idx].country)) {
-			countryNames.push(flagsData[idx].country);
+		if (!cNames.includes(flagsData[idx].country)) {
+			cNames.push(flagsData[idx].country);
+			cIndexes.push(idx);
 
 			const flagWrapper = document.createElement('div');
 			flagWrapper.classList.add('flag-wrapper', 'flag-light');
@@ -28,10 +30,10 @@ const generateGameGrid = () => {
 		}
 	}
 
-	let guessIdx = Math.floor(Math.random() * countryNames.length);
+	let guessIdx = Math.floor(Math.random() * cNames.length);
 
 	const guessCountry = document.createElement('h2');
-	guessCountry.textContent = countryNames[guessIdx];
+	guessCountry.textContent = cNames[guessIdx];
 	let fGuess = guessCountry.textContent;
 	content.append(flagContainer, guessCountry);
 
@@ -44,9 +46,9 @@ const generateGameGrid = () => {
 				el.classList.add('disable-div');
 			});
 
-			const countryName = el.getAttribute('name');
+			const cName = el.getAttribute('name');
 
-			playGame(el, countryName, fGuess, yourScore, livesWrapper);
+			playGame(el, cNames, cIndexes, cName, fGuess, yScore, livesWrapper);
 			setTimeout(generateGameGrid, 1000);
 		});
 	});

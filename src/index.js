@@ -1,12 +1,6 @@
 import './style.css';
 import Heart from '../icons/heart.svg';
-import {
-	flagsData,
-	score,
-	lives,
-	playGame,
-	generateGameGrid,
-} from './generate';
+import { flagsData, playGame, generateGameGrid } from './generate';
 
 const content = document.getElementById('content');
 const flagContainer = document.getElementById('flag-container');
@@ -20,12 +14,14 @@ const yourScore = document.getElementById('your-score');
 		livesWrapper.appendChild(heartIcon);
 	}
 
-	let countryNames = [];
+	let cNames = [];
+	let cIndexes = [];
 
-	while (countryNames.length < 4) {
+	while (cNames.length < 4) {
 		let idx = Math.floor(Math.random() * flagsData.length);
-		if (!countryNames.includes(flagsData[idx].country)) {
-			countryNames.push(flagsData[idx].country);
+		if (!cNames.includes(flagsData[idx].country)) {
+			cNames.push(flagsData[idx].country);
+			cIndexes.push(idx);
 
 			const flagWrapper = document.createElement('div');
 			flagWrapper.classList.add('flag-wrapper', 'flag-light');
@@ -40,10 +36,10 @@ const yourScore = document.getElementById('your-score');
 		}
 	}
 
-	let guessIdx = Math.floor(Math.random() * countryNames.length);
+	let guessIdx = Math.floor(Math.random() * cNames.length);
 
 	const guessCountry = document.createElement('h2');
-	guessCountry.textContent = countryNames[guessIdx];
+	guessCountry.textContent = cNames[guessIdx];
 	let guess = guessCountry.textContent;
 	content.append(flagContainer, guessCountry);
 
@@ -55,8 +51,8 @@ const yourScore = document.getElementById('your-score');
 				el.classList.remove('flag-light');
 				el.classList.add('disable-div');
 			});
-			const countryName = el.getAttribute('name');
-			playGame(el, countryName, guess, yourScore, livesWrapper);
+			const cName = el.getAttribute('name');
+			playGame(el, cNames, cIndexes, cName, guess, yourScore, livesWrapper);
 			setTimeout(generateGameGrid, 1000);
 		});
 	});

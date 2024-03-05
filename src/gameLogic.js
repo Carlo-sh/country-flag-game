@@ -5,7 +5,7 @@ const flagsData = JSON.parse(JSON.stringify(data));
 let score = 0;
 let lives = 3;
 
-const playGame = (item, cName, guess, ySc, lWr) => {
+const playGame = (item, cNames, cIndexes, cName, guess, ySc, lWr) => {
 	if (cName === guess) {
 		item.classList.add('correct-answer');
 		score++;
@@ -18,7 +18,11 @@ const playGame = (item, cName, guess, ySc, lWr) => {
 			content.innerHTML = `<h1>Game Over</h1>`;
 		}
 	}
-	const delCountry = flagsData.splice(flagsData.indexOf(flagsData.cName));
+
+	flagsData.splice(
+		flagsData.indexOf(flagsData[cIndexes[cNames.indexOf(cName)]]),
+		1,
+	);
 };
 
 export { flagsData, score, lives, playGame };
