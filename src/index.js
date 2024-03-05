@@ -1,18 +1,15 @@
 import data from '../data/country-flag.json';
 import './style.css';
-// import Wall from '../images/world-wall.png';
 import Heart from '../icons/heart.svg';
 
 const content = document.getElementById('content');
 const flagContainer = document.getElementById('flag-container');
 const livesWrapper = document.getElementById('lives-wrapper');
-const lives = document.getElementById('lives');
+const yourScore = document.getElementById('your-score');
 
 let countryNames = [];
 let score = 0;
 let livesNum = 3;
-
-const yourScore = document.getElementById('your-score');
 
 while (countryNames.length < 4) {
 	let idx = Math.floor(Math.random() * (data.length + 1));
@@ -39,7 +36,6 @@ for (let i = 0; i < 3; i++) {
 }
 
 const flagWrappers = document.querySelectorAll('.flag-wrapper');
-
 let guessIdx = Math.floor(Math.random() * countryNames.length);
 
 const guessCountry = document.createElement('h2');
