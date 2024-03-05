@@ -22,6 +22,11 @@
 body {
 	min-height: 100vh;
 	background-color: var(--primary-bg-color);
+	background: linear-gradient(
+			rgba(255, 255, 255, 0.7),
+			rgba(255, 255, 255, 0.7)
+		),
+		url(../images/world-wall.png);
 }
 
 h1 {
@@ -31,11 +36,18 @@ h1 {
 	padding: 16px 0 32px 0;
 }
 
+#container {
+	display: flex;
+	justify-content: center;
+	column-gap: 30px;
+}
+
 #content {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
 }
 
 #flag-container {
@@ -56,8 +68,20 @@ h1 {
 	align-items: center;
 }
 
-.flag-wrapper:hover {
+.flag-light:hover {
 	background-color: gold;
+}
+
+.correct-answer {
+	background-color: green;
+}
+
+.wrong-answer {
+	background-color: red;
+}
+
+.disable-div {
+	pointer-events: none;
 }
 
 .flag {
@@ -68,4 +92,18 @@ h1 {
 h2 {
 	font-family: 'TypewriterReg', sans-serif;
 	padding: 32px 0;
+}
+
+#lives-wrapper {
+	display: flex;
+}
+
+#lives {
+	padding-right: 1rem;
+}
+
+#score {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
