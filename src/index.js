@@ -1,6 +1,6 @@
 import './style.css';
 import Heart from '../icons/heart.svg';
-import { flagsData, playGame, generateGameGrid } from './generate';
+import { flagsData, playGame, generateGameGrid, garbage } from './generate';
 
 const content = document.getElementById('content');
 const flagContainer = document.getElementById('flag-container');

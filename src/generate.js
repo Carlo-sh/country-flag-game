@@ -1,9 +1,13 @@
-import { flagsData, score, lives, playGame } from './gameLogic';
+import { flagsData, score, lives, garbage, playGame } from './gameLogic';
 
 const yScore = document.getElementById('your-score');
 const livesWrapper = document.getElementById('lives-wrapper');
 
 const generateGameGrid = () => {
+	if (flagsData.length < 4) {
+		content.innerHTML = `<h1>You have guessed all the flags!</h1>`;
+		return;
+	}
 	if (content.innerHTML === `<h1>Game Over</h1>`) return;
 	content.innerHTML = '';
 	const flagContainer = document.createElement('div');
@@ -54,4 +58,4 @@ const generateGameGrid = () => {
 	});
 };
 
-export { flagsData, score, lives, playGame, generateGameGrid };
+export { flagsData, score, lives, garbage, playGame, generateGameGrid };
